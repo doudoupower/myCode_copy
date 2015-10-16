@@ -1,0 +1,30 @@
+elasticdump    --input=http://localhost:9200/.kibana    --output=$   --type=data   --searchBody='{"filter": { "or": [ {"type": {"value": "dashboard"}}, {"type" : {"value":"visualization"}}] }}'    > kibana-exported.json
+elasticdump     --input=kibana-exported.json     --output=http://localhost:9200/.kibana     --type=data
+elasticdump --input kibana-exported.json --output=http://localhost:9200/.kibana --type=mapping
+elasticdump  --input=http://localhost:9200/my_index   --output=/data/my_index_mapping.json   --type=mapping
+
+elasticdump     --input=http://c4t13886.itcs.hp.com:9200/.kibana     --output=$    --type=data    --searchBody='{"filter": { "or": [ {"type": {"value": "dashboard"}}, {"type" : {"value":"visualization"}}] }}'    > kibana-exported.json
+elasticdump    --input=http://c4t13681.itcs.hp.com:9200/.kibana     --output=$    --type=data     --searchBody='{"filter": {"type" : {"value":"visualization"} }}'     > kibana-exported-visualizations.json
+elasticdump   --input=http://c4t13886.itcs.hp.com:9200/.kibana   --output=/home/yyang2/data/my_index_mapping.json   --type=mapping
+elasticdump     --input=http://c4t13886.itcs.hp.com:9200/.kibana     --output=/home/yyang2/data/my_index_mapping.json    --type=mapping    
+elasticdump     --input=http://c4t13681.itcs.hp.com:9200/.kibana     --output=/home/yyang2/data/my_index_mapping.json    --type=mapping    
+//导出所有的
+elasticdump       --input=http://localhost:9200/.kibana      --output=$    --type=data     > kibana-exported-visualizations.json 
+//导入所有的
+elasticdump     --input=my_index_mapping.json     --output=http://localhost:9200/.kibana    --type=data
+//导出所有的visualization
+elasticdump       --input=http://localhost:9200/.kibana      --output=/home/yyang2/data/my_index_mapping.json    --type=data     --searchBody='{"filter": {"type" : {"value":"visualization"} }}' 
+//导出所有的dashboard
+elasticdump       --input=http://localhost:9200/.kibana      --output=/home/yyang2/data/my_index_mapping.json    --type=data     --searchBody='{"filter": {"type" : {"value":"dashboard"} }}' 
+//导出所有的visualization/dashboard
+elasticdump       --input=http://localhost:9200/.kibana      --output=/home/yyang2/data/my_index_mapping.json    --type=data     --searchBody='{"filter": { "or": [ {"type": {"value": "dashboard"}}, {"type" : {"value":"visualization"}}] }}'  
+//导出单个visualization
+elasticdump       --input=http://localhost:9200/.kibana      --output=/home/yyang2/data/my_index_mapping.json    --type=data    --searchBody='{"filter": { "or": [ {"type": {"value": "dashboard"}}, "source":{"title" : {"value":"dashboard_test1"}}] }}'
+
+elasticdump       --input=http://localhost:9200/.kibana      --output=/home/yyang2/data/my_index_mapping.json    --type=data     --searchbody '{"filter": {"and": [{"type": {"value": "dashboard"}}, {"ids": {"value": ["dashboard_test1"]}}]}}' 
+elasticdump       --input=http://localhost:9200/.kibana      --output=/home/yyang2/data/my_index_mapping.json    --type=data     --searchbody '{"filter": {"ids": {"type" : "my_type","value": ["dashboard_test1"]}}}' 
+elasticdump       --input=http://localhost:9200/.kibana      --output=/home/yyang2/data/my_index_mapping.json    --type=data     --searchbody '{"filter": {"and": [{"type": {"value": "visualization"}}, {"ids": {"values": ["pie-chart"]}}]}}' 
+
+curl -X POST 'http://c4t13681.itcs.hp.com:9200/.kibana/_search?pretty=1' -d '{"filter": {"and": [{"type": {"value": "dashboard"}}, {"ids": {"values": ["dashboard_test1"]}}]}}'  >/home/yyang2/data/my_index_mapping.json
+curl -X POST 'http://c4t13681.itcs.hp.com:9200/.kibana/_search?pretty=1' -d '{"filter": {"type" : {"value":"visualization"} }}' 
+

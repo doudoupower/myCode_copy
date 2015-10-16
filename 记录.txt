@@ -1,0 +1,96 @@
+:wq 保存并退出
+ZZ 保存并退出
+:q! 强制退出并忽略所有更改
+:e! 放弃所有修改，并打开原来文件。
+ //阿里云服务器监控数据--------------------------
+CPU使用率、内存使用率、平均负载、磁盘IO读写、磁盘使用率、入流量、出流量、TCP连接数、进程数
+export http_proxy=http://proxy.houston.hp.com:8080 &&export https_proxy=http://proxy.houston.hp.com:8080
+  //文件夹权限修改-------------------------------
+ chmod -R 777 /var           var的权限就变成777，var下的所有子目录和文件权限都将变成777
+  // vim下查找命令----------------------------------
+ 命令模式下，输入 /word 后回车，即查找word，搜索
+按 n 查找下一个匹配单词，按 N 查找上一个匹配单词。
+  //vim命令-------------------------------------
+ vi 编辑器
+ 删除字符 光标移上去按x
+ 输入按i
+ dd删除一行
+ u撤销
+ //环境变量设置 
+export PATH=$PATH:/opt/influxdb
+ //查找命令
+find -name ****
+ //拷贝命令
+语法： cp [选项] 源文件或目录 目标文件或目录
+ //grafana
+ #sudo service grafana-server start
+ #cd /etc/init.d
+  //collectd
+ $ sudo sbin/collectd
+$ /opt/collectd/sbin/collectd 
+ #vim /etc/collectd.conf
+ #vim /opt/collectd/etc/collectd.conf
+ #/etc/init.d/collectd restart
+ #/opt/collectd/share/collectd/types.db
+  //influxdb
+ # sudo /etc/init.d/influxdb start
+ #vim /etc/opt/influxdb/influxdb.conf
+ #/opt/mount2
+  //snmp
+ apt-get install -y libsnmp-dev librrd-dev supervisor
+  snmpwalk -v 2c -c public -O e c4t13680.itcs.hp.com .1.3.6.1.4.1.2021.11.11.0
+  service  snmpd restart
+ vim /etc/snmp/snmpd.conf
+ //hubot
+ cd /etc/init.d      service hubot start
+ cd /opt/hubot/jRobot/scripts
+ //docker
+ docker run -t -i logstash-elasticsearch-kibana /bin/bash
+ wget -qO- https://get.docker.com/ | sh
+ docker pull ubuntu:14.04
+ docker rmi <image id>
+ sudo docker build -t elk .
+ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+  //查看磁盘剩余空间
+ df -hl 
+ 用以下命令查看单个目录
+# du -bs dir_name
+查看文件夹大小 h是显示大小的单位
+#du -sh /home
+#ls -lh
+ //查看命令帮助
+man是一个查看帮助文档的命令。 比如，你要看ls 的详细使用方法，就可以 man  ls
+ //查找杀掉进程
+ps -ef | grep collectd
+kill -9 *********
+ //删除swap文件
+ls -la |grep .collectd.conf.swp
+rm .collectd.conf.swp 
+ //安装本地文件
+sudo dpkg -i influxdb_latest_amd64.deb
+sudo yum localinstall influxdb-0.9.2-1.x86_64.rpm
+tar zxvf fileNameHere.tgz
+安装tar.gz文件
+1、找到相应的软件包，比如soft.tar.gz，下载到本机某个目录； 2、打开一个终端，su -成root用户； 3、cd soft.tar.gz所在的目录； 4、tar -xzvf soft.tar.gz //一般会生成一个soft目录 5、cd soft 6、./configure 7、make 8、make install
+ //创建重命名删除文件
+touch 1.txt   
+mkdir daiyuanqi
+删除空目录用rmdir  例如：rmdir daiyuanqi （有东西的目录不能删）
+ 删除装有东西的目录就用rm -rf  例如rm -rf XXX
+ mv A B
+  //导出到txt文件
+ snmpwalk -v 2c -c scm-stats-ghe-2015 -O e issfpga15.cce.hp.com > miao.txt
+  //获取gcc套件
+ yum install gcc
+  //重启服务
+ cd /etc/init.d service restart
+  //cpu占用率
+ ps -aux
+ // linux版本
+  lsb_release -a
+  file /sbin/init  32  64
+  //安装npm nodejs
+curl --silent --location https://rpm.nodesource.com/setup | bash -
+yum -y install nodejs 
+curl -L https://www.npmjs.com/install.sh | sh
+
