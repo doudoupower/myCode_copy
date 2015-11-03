@@ -90,7 +90,22 @@ mkdir daiyuanqi
   lsb_release -a
   file /sbin/init  32  64
   //安装npm nodejs
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
+  nvm install 4.2.1
 curl --silent --location https://rpm.nodesource.com/setup | bash -
 yum -y install nodejs 
 curl -L https://www.npmjs.com/install.sh | sh
-
+//安装winscp root权限 
+cat /etc/ssh/sshd_config|grep sftp
+sudo /usr/libexec/openssh/sftp-server
+//hubot install debug
+sudo npm install -g yo --unsafe-perm
+mkdir hubot&&cd hubot&&yo hubot
+package.json--"dependencies": {
+  "hubot-flowdock": ">= 0.0.1",
+  "hubot": ">= 2.0.0",
+  ...
+}
+Procfile-- -a flowdock
+export HUBOT_FLOWDOCK_API_TOKEN=https://www.flowdock.com/account/tokens
+bin/hubot -a flowdock
